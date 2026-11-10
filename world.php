@@ -37,7 +37,7 @@ if ($lookup === 'cities') {
 </table>
 <?php
 } else {
-    $stmt = $conn->prepare("SELECT * FROM countries WHERE name LIKE :country");
+    $stmt = $conn->prepare("SELECT * FROM countries WHERE name LIKE :country ORDER BY name ASC");
     $stmt->execute([':country' => $like]);
     $results = $stmt->fetchAll(PDO::FETCH_ASSOC);
 ?>
