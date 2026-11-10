@@ -12,12 +12,7 @@ $lookup  = isset($_GET['lookup']) ? $_GET['lookup'] : 'country';
 $like    = '%' . $country . '%';
 
 if ($lookup === 'cities') {
-    $stmt = $conn->prepare(
-        "SELECT ci.name, ci.district, ci.population
-         FROM cities ci
-         JOIN countries co ON ci.country_code = co.code
-         WHERE co.name LIKE :country"
-    );
+    $stmt = $conn->prepare("SELECT ci.name, ci.district, ci.population FROM cities ci JOIN countries co ON ci.country_code = co.code WHERE co.name LIKE :country ORDER BY ci.name ASC");
     $stmt->execute([':country' => $like]);
     $results = $stmt->fetchAll(PDO::FETCH_ASSOC);
 ?>
